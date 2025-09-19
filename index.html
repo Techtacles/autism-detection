@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Autism Detection</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        video { border: 2px solid #333; border-radius: 10px; }
+        button { font-size: 16px; padding: 10px 20px; margin: 20px; cursor: pointer; }
+        #result { font-size: 24px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Live Facial Image Prediction</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <br>
+    <button id="capture">Capture and Predict</button>
+    <div id="result">Prediction: ...</div>
+
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+        const resultDiv = document.getElementById('result');
+        
+        // --- 1. Access the camera ---
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                video.srcObject = stream;
+                video.play();
+            });
+        }
+
+        // --- 2. Capture and send image on button click ---
+        captureButton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 640, 480);
+
+            resultDiv.textContent = "Processing...";
+
+            // Convert canvas to a blob (file)
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('file', blob, 'capture.jpg');
+
+                // --- 3. Send to FastAPI backend ---
+                // Make sure your FastAPI is running on http://127.0.0.1:8000
+                fetch('http://127.0.0.1:8000/predict', { 
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // --- 4. Display the result ---
+                    resultDiv.textContent = `Prediction: ${data.prediction} (Confidence: ${data.confidence.toFixed(2)}%)`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultDiv.textContent = 'Error: Could not connect to API.';
+                });
+            }, 'image/jpeg');
+        });
+    </script>
+</body>
+</html>
