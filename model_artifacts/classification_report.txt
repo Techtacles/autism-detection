@@ -1,0 +1,19 @@
+Autism Detection Model - Classification Report
+==================================================
+
+Test Accuracy: 0.7345 (73.45%)
+
+Detailed Classification Report:
+              precision    recall  f1-score   support
+
+    autistic       0.68      0.87      0.77       289
+non_autistic       0.82      0.60      0.69       291
+
+    accuracy                           0.73       580
+   macro avg       0.75      0.73      0.73       580
+weighted avg       0.75      0.73      0.73       580
+
+
+Confusion Matrix:
+[[252  37]
+ [117 174]]

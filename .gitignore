@@ -1,0 +1,61 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+.env/
+.env.*
+
+# Tooling & editors
+.vscode/
+.idea/
+*.code-workspace
+
+# Testing & coverage
+.pytest_cache/
+.coverage*
+htmlcov/
+.tox/
+.mypy_cache/
+.pyre/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Logs
+logs/
+*.log
+
+# Build & dist
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Data (keep repo light)
+data/raw/
+data/processed/
+
+
+# Images/plots generated during runs
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.tiff
+
+# Mac specific
+.AppleDouble
+.LSOverride
+
+# uv / packaging
+# Keep pyproject.toml and uv.lock tracked
+# (uncomment the next line only if you generate additional lockfiles you don't want)
+# *.lock

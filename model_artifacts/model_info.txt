@@ -1,0 +1,12 @@
+Autism Detection Model Information
+========================================
+
+Model Architecture: LightweightAutismCNN
+Total Parameters: 422,530
+Trainable Parameters: 422,530
+Model Size: 1.61 MB
+Input Size: 224x224x3
+Number of Classes: 2
+Classes: ['autistic', 'non_autistic']
+Best Validation Accuracy: 76.21%
+Test Accuracy: 0.73%
