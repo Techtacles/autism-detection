@@ -1,4 +1,4 @@
-# 🧠 Autism Detection from Facial Images
+# 🧠 Autism Detection from Facial Images V2
 
 A lightweight deep learning model for detecting autism spectrum disorder from facial images using PyTorch and FastAPI. This project provides a complete end-to-end solution for autism detection with a production-ready API.
 
